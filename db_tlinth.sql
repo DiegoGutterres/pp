@@ -10,7 +10,7 @@ CREATE TABLE req_user(
 CREATE TABLE res_user(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT, 
-    response VARCHAR(255),
+    response VARCHAR(640),
     FOREIGN KEY (user_id) REFERENCES req_user(id)
 );
 
