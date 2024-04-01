@@ -74,6 +74,8 @@ button{
     justify-content: center;
     align-items: center;
     margin: 0vh 10vh;
+    font-size: 30px;
+    color: #ffff;
     background-color: #1D84FE;
     border: none;
     padding: 20px;
