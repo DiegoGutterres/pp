@@ -39,7 +39,18 @@ main{
     padding: 25px;    
     display: flex;
     flex-direction: column;
+    padding-top: 5vh;
 }   
+
+.camera p, .qr-code p, .doc-id p  {
+    text-decoration: underline;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 19px;
+    padding-top: 1vh;
+    color: #675A5A;
+}
 
 .qr-code{
     padding: 25px;    
@@ -80,4 +91,69 @@ button{
     border: none;
     padding: 20px;
     border-radius: 40px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.how-it-works{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+    
+}
+
+.how-it-works p{
+    text-align: justify;
+    padding: 0;
+}
+
+.work-div-1{
+    display: flex;
+    flex-direction: column;
+    padding: 4vh;
+    margin-top: 2vh;
+    padding-top: 6vh;
+    justify-content: space-between;
+    max-width: 80vw;
+    height: 25vh;
+    color: #675A5A;
+}
+
+.work-div-1 p{
+    font-size: 28px;
+}
+
+
+.work-div-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+    align-items: center;
+}
+
+.options-button{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 19px;
+    color: #675A5A;
+    padding: 3vh;
+}
+
+.copyright {
+    font-family: "Tenali Ramakrishna", sans-serif;
+    padding: 3.5vh;
+    padding-top: 7vh;
+    font-weight: 200;
+}
+
+.work-div-2 button{
+    font-size: 54px;
+    height: 16vh;
+    width: 24vh;
+    border-radius: 100px;
 }
