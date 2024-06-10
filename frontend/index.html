@@ -4,77 +4,82 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TLINTH</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel= "stylesheet" href="/static/style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
     </head>
     
 <body>
-    <header>
-        <h1>tlinth.</h1>
-    </header>
-    
-    <main>  
-        <!-- <py-script src="../main.py"></py-script> -->
+    <div class="bg">
 
-        <div class="camera">
-            
-            <h2>câmera</h2>
-            
-            <p>Para prosseguir, clique no botão
-                aponte o celular para o documento
-                e aguarde brevemente
-            </p>
-            
-            
-            <button class="camera-next">></button>
-        </div>
 
-        <div class="camera">
-            
-            <h2>arquivo</h2>
-            
-            <p>Para prosseguir, clique no botão
-                de upload no documento
-                e aguarde brevemente
-            </p>
-            
-            
-            <button class="camera-next">></button>
-        </div>
+        <header>
+            <h1>tlinth.</h1>
+        </header>
         
-        <div class="qr-code">
-            <h2>qr-code</h2>
-            
-            <p>Para ler o qr-code que veio junto
-                com o documento aperte o botão
-                abaixo aponte a câmera para o
-                código parecido com esse
-            </p>
-            
-            <button class="qr-code-next">></button>
-        </div>
-        
-        <div class="doc-id">
-            <p>Ou digite o número que se encontra
-                nas áreas de baixo do documento
-            </p>
-            
-            <input type="text" placeholder="Digite aqui">
-            <button class="doc-id-next">></button>
-            
-            
-        </div>
-        
-    </main>
+        <main>  
+            <!-- <py-script src="../main.py"></py-script> -->
     
-    <footer>
+            <div class="camera">
+                
+                <h2>câmera</h2>
+                
+                <p>Para prosseguir, clique no botão
+                    aponte o celular para o documento
+                    e aguarde brevemente
+                </p>
+                
+                
+                <button class="camera-next">></button>
+            </div>
+    
+            <div class="arquivo">
+                
+                <h2>arquivo</h2>
+                
+                <p>Para prosseguir, clique no botão,
+                    de upload no documento
+                    e aguarde brevemente
+                </p>
+                
+                <button id="botaoArquivo" class="arquivo-next">Upload</button>
+                <input type="file" id="inputArquivo" style="display: none;">
+                <p id="nomeArquivo"></p>
+    
+            </div>
+            
+            <div class="qr-code">
+                <h2>qr-code</h2>
+                
+                <p>Para ler o qr-code que veio junto
+                    com o documento aperte o botão
+                    abaixo aponte a câmera para o
+                    código parecido com esse
+                </p>
+                
+                <button class="qr-code-next">></button>
+            </div>
+            
+            <div class="doc-id">
+                <p>Ou digite o número que se encontra
+                    nas áreas de baixo do documento
+                </p>
+                
+                <input type="text" placeholder="Digite aqui">
+                <button class="doc-id-next">></button>
+                
+                
+            </div>
+            
+        </main>
         
-    </footer>
+        <footer>
+            
+        </footer>
+    </div>
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-    <script src="script.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 
 </html>
