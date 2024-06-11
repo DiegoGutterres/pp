@@ -163,6 +163,7 @@ a{
     font-size: 19px;
     color: #675A5A;
     padding: 3vh;
+    max-width: 30vh;
 }
 
 .copyright {

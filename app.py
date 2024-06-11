@@ -34,11 +34,16 @@ def process_file(filepath):
 
 @app.route('/')
 def serve_index():
+    return send_from_directory('frontend', 'start.html')
+
+@app.route('/index.html')
+def serve_start():
     return send_from_directory('frontend', 'index.html')
 
 @app.route('/static/<path:path>')
 def send_static(path):
     return send_from_directory('frontend/static', path)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
