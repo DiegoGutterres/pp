@@ -76,7 +76,13 @@ main{
     padding: 25px;    
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
+
+.arquivo-next{
+    min-width: 170px;
+}
+
 
 .doc-id{
     padding: 25px;    
@@ -111,6 +117,7 @@ button{
     border: none;
     padding: 20px;
     border-radius: 40px;
+    cursor: pointer;
 }
 
 a{
@@ -162,8 +169,7 @@ a{
     font-weight: 700;
     font-size: 19px;
     color: #675A5A;
-    padding: 3vh;
-    max-width: 30vh;
+    padding: 25px;
 }
 
 .copyright {
@@ -179,3 +185,63 @@ a{
     width: 24vh;
     border-radius: 100px;
 }
+
+
+/* response html  */
+
+.background-response{
+    background-color: #979797;
+}
+
+.header-response{
+    background-color: #979797;
+}
+
+.traducao{
+    margin: 16px;
+}
+.how-it-works-response{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120vh;
+    padding: 15px;
+}
+
+#translatedText{
+    text-align: justify;
+}
+
+.moreOne{
+    display: flex;
+    justify-content: center;
+}
+
+.moreone{
+    margin-top: 48px;
+    color: #675A5A;
+    font-weight: 400;
+    text-align: center;
+    font-size: 30px;
+}
+
+.simounao{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.simounao button{
+    font-size: 16px;
+    padding: 16px;
+}
+
+#goHomeButton{
+    background: none;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #675A5A;
+}
+

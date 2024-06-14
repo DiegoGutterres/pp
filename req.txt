@@ -1,0 +1,4 @@
+https://github.com/UB-Mannheim/tesseract/wiki
+
+pip install pytesseract
+pip install requests

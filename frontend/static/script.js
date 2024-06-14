@@ -1,38 +1,34 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var botaoArquivo = document.getElementById('botaoArquivo');
-    var inputArquivo = document.getElementById('inputArquivo');
-    var nomeArquivo = document.getElementById('nomeArquivo');
+document.getElementById('botaoArquivo').addEventListener('click', function() {
+    document.getElementById('inputArquivo').click();
+});
 
-    botaoArquivo.addEventListener('click', function() {
-        inputArquivo.click();
-    });
+document.getElementById('inputArquivo').addEventListener('change', function(event) {
+    const fileName = event.target.files[0].name;
+    document.getElementById('nomeArquivo').innerText = fileName;
+    document.getElementById('botaoArquivo').style.display = 'none';
+    document.getElementById('nextButton').style.display = 'block';
+});
 
-    inputArquivo.addEventListener('change', function() {
-        if (inputArquivo.files.length > 0) {
-            var arquivoSelecionado = inputArquivo.files[0].name;
-            nomeArquivo.textContent = "Arquivo selecionado: " + arquivoSelecionado;
-            botaoArquivo.textContent = ">"        
-
-            // Crie um FormData para enviar o arquivo via AJAX
-            var formData = new FormData();
-            formData.append('file', inputArquivo.files[0]);
-
-            // Envie o arquivo via AJAX
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+document.getElementById('nextButton').addEventListener('click', function() {
+    var formData = new FormData(document.getElementById('uploadForm'));
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('Raw response:', response);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Parsed response:', data);
+        if (data.success) {
+            window.location.href = '/response.html';
         } else {
-            nomeArquivo.textContent = "";
-            botaoArquivo.textContent = "Upload"        
-
+            alert('Erro no upload: ' + data.error);
         }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro no upload');
     });
 });
