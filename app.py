@@ -1,13 +1,18 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template, redirect, url_for
+from flask import Flask, request, jsonify, send_from_directory, session
 import pymysql  
 import os
+import uuid
 from main import process_image_and_generate_response, process_pdf_and_generate_response
 
 app = Flask(__name__, static_folder='frontend/static', static_url_path='/static')
+app.secret_key = 'fgJIMmgkrti5KKLOG@35451sfmkoit455#5'
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'db_tlinth'
+
+
 
 # Conexão com o banco de dados
 conn = pymysql.connect(
@@ -19,11 +24,20 @@ conn = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
+# Gerar user_id único para cada nova sessão
+@app.before_request
+def before_request():
+    if 'user_id' not in session:
+        session['user_id'] = str(uuid.uuid4())
+
 
 def storeRes(modes, response):
     with conn.cursor() as cursor:
-        sql = "INSERT INTO res_user (modes, response) VALUES (%s, %s)"
-        cursor.execute(sql, (modes, response)) 
+        before_request()
+        user_id = session.get('user_id')
+        sql = "INSERT INTO res_user (modes, response, user_id) VALUES (%s, %s, %s)"
+        cursor.execute(sql, (modes, response, user_id)) 
+        print(user_id)
     conn.commit()
 
 
@@ -59,6 +73,7 @@ def upload_file():
             storeRes('ARQUIVO', simplified_text)
             return jsonify({'success': True}), 200
         
+
         elif '.pdf' in file.filename:
         
             pdf_text, simplified_text = process_pdf_and_generate_response(filepath)
