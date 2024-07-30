@@ -33,7 +33,6 @@ def before_request():
 
 def storeRes(modes, response):
     with conn.cursor() as cursor:
-        before_request()
         user_id = session.get('user_id')
         sql = "INSERT INTO res_user (modes, response, user_id) VALUES (%s, %s, %s)"
         cursor.execute(sql, (modes, response, user_id)) 
