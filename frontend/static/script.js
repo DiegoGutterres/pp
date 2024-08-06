@@ -32,3 +32,21 @@ document.getElementById('nextButton').addEventListener('click', function() {
         alert('Erro no upload');
     });
 });
+
+
+document.getElementById('retrieveButton').addEventListener('click', function() {
+    fetch('/retrieve')
+    .then(response => response.json())
+    .then(data => {
+        let recordList = document.getElementById('recordList');
+        recordList.innerHTML = '';
+        data.data.forEach(record => {
+            let listItem = document.createElement('li');
+            listItem.textContent = record.conteudo;
+            recordList.appendChild(listItem);
+        });
+    })
+    .catch((error) => {
+        console.error('Erro ao recuperar os registros:', error);
+    });
+});

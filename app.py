@@ -86,6 +86,22 @@ def upload_file():
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/retrieve', methods=['GET'])
+def retrieve():
+    user_id = session.get('user_id')
+    response = {'success': False, 'data': []}
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT conteudo FROM registros WHERE user_id = %s"
+            cursor.execute(sql, (user_id,))
+            registros = cursor.fetchall()
+            response['data'] = registros
+            response['success'] = True
+    except Exception as e:
+        print(e)
+    return jsonify(response)   
+
+
 @app.route('/get_response')
 def get_response():
     if 'simplified_text' in response_data:
