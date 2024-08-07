@@ -1,5 +1,8 @@
 https://github.com/UB-Mannheim/tesseract/wiki
 
 pip install pytesseract
-pip install requests
 pip install pdfquery
+pip install flask
+pip install pymysql
+pip install -q -U google-generativeai
+pip install six

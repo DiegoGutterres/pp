@@ -50,3 +50,38 @@ document.getElementById('retrieveButton').addEventListener('click', function() {
         console.error('Erro ao recuperar os registros:', error);
     });
 });
+
+// botao de camera
+
+document.getElementById('cameraButton').addEventListener('click', function() {
+    document.getElementById('inputCamera').click();
+});
+
+document.getElementById('inputCamera').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            console.log('Raw response:', response);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Parsed response:', data);
+            if (data.success) {
+                window.location.href = '/response.html';
+            } else {
+                alert('Erro no upload: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro no upload');
+        });
+    }
+});

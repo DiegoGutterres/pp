@@ -44,9 +44,9 @@
             window.location.href = '/index.html';
         });
 
-        // document.getElementById('goHomeButton').addEventListener('click', function() {
-        //     window.location.href = '/';
-        // });
+        document.getElementById('goHomeButton').addEventListener('click', function() {
+            window.location.href = '/';
+        });
 
         fetch('/get_response')
             .then(response => response.json())
@@ -57,23 +57,11 @@
                 console.error('Erro:', error);
                 document.getElementById('translatedText').innerText = 'Erro ao carregar o texto';
             });
-            
-        document.getElementById('goHomeButton').addEventListener('click', function() {
-            fetch('/retrieve')
-            .then(response => response.json())
-            .then(data => {
-                let recordList = document.getElementById('recordList');
-                recordList.innerHTML = '';
-                data.data.forEach(record => {
-                    let listItem = document.createElement('li');
-                    listItem.textContent = record.conteudo;
-                    recordList.appendChild(listItem);
-                });
-            })
-            .catch((error) => {
-                console.error('Erro ao recuperar os registros:', error);
-            });
-        });
+        
+        
+
+        
+   
     </script>
 </body>
 </html>
