@@ -30,7 +30,6 @@
                     <button id="translateAgainButton">Sim</button>
                     <button id="goHomeButton">Não</button>
                 </div>
-                <ul id="recordList"></ul>
                 
                 <div class="work-div-2">
                     <span class="copyright">© 2023 Tlinth - Todos direitos reservados</span>
@@ -44,10 +43,6 @@
             window.location.href = '/index.html';
         });
 
-        document.getElementById('goHomeButton').addEventListener('click', function() {
-            window.location.href = '/';
-        });
-
         fetch('/get_response')
             .then(response => response.json())
             .then(data => {
@@ -57,11 +52,31 @@
                 console.error('Erro:', error);
                 document.getElementById('translatedText').innerText = 'Erro ao carregar o texto';
             });
-        
-        
+            
+            
+        document.getElementById('goHomeButton').addEventListener('click', function() {
+            fetch('/get_all_responses')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let responseHtml = '';
+                    data.records.forEach((record, index) => {
+                        responseHtml += `<div class="documento">
+                            <h2 class="doc-allresponse">Documento ${record.modes} - ${index + 1}  </h2>
+                            <p>${record.response}</p>
+                        </div>`;
+                    });
+                    localStorage.setItem('allResponsesHtml', responseHtml);
+                    window.location.href = '/allresponses.html';
+                } else {
+                    alert('Erro ao recuperar as respostas: ' + data.error);
+                }
+            })
+            .catch((error) => {
+                console.error('Erro ao recuperar as respostas:', error);
+            });
+        });
 
-        
-   
     </script>
 </body>
 </html>

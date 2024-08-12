@@ -86,20 +86,22 @@ def upload_file():
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
 
-# @app.route('/retrieve', methods=['GET'])
-# def retrieve():
-#     user_id = session.get('user_id')
-#     response = {'success': False, 'data': []}
-#     try:
-#         with conn.cursor() as cursor:
-#             sql = "SELECT conteudo FROM registros WHERE user_id = %s"
-#             cursor.execute(sql, (user_id,))
-#             registros = cursor.fetchall()
-#             response['data'] = registros
-#             response['success'] = True
-#     except Exception as e:
-#         print(e)
-#     return jsonify(response)   
+@app.route('/get_all_responses')
+def get_all_responses():
+    user_id = session.get('user_id')
+    response = {'success': False, 'records': []}
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT modes, response FROM res_user WHERE user_id = %s"
+            cursor.execute(sql, (user_id,))
+            records = cursor.fetchall()
+            response['records'] = records
+            response['success'] = True
+    except Exception as e:
+        print(e)
+        response['error'] = str(e)
+    return jsonify(response)
+
 
 
 @app.route('/get_response')
@@ -120,6 +122,11 @@ def serve_start():
 @app.route('/response.html')
 def serve_response():
     return send_from_directory('frontend', 'response.html')
+
+@app.route('/allresponses.html')
+def serve_all_responses():
+    return send_from_directory('frontend', 'allresponses.html')
+
 
 @app.route('/static/<path:path>')
 def send_static(path):

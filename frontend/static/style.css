@@ -245,3 +245,17 @@ a{
     color: #675A5A;
 }
 
+/* all responses */
+
+.traducoes{
+    padding-top: 25px;
+    text-align: center;
+    justify-content: center;
+}
+
+.doc-allresponse{
+    font-size: 22px;
+    text-align: justify;
+    margin-top: 25px;
+    font-weight: 500;
+}

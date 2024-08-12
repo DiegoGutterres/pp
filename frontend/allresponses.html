@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLINTH</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-response">
+        <header class="header-response">
+            <h1>tlinth.</h1>
+        </header>
+    
+        <main class="main-response">  
+                <h2 class="traducoes">Traduções:</h2>
+                <div id="responseContainer"></div>
+
+
+
+                <div class="work-div-2">
+                    <span class="copyright">© 2023 Tlinth - Todos direitos reservados</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const responseContainer = document.getElementById('responseContainer');
+            const allResponsesHtml = localStorage.getItem('allResponsesHtml');
+            if (allResponsesHtml) {
+                responseContainer.innerHTML = allResponsesHtml;
+            } else {
+                responseContainer.innerHTML = '<p>Nenhuma resposta encontrada.</p>';
+            }
+        });
+    </script>      
+</body>
+</html>
