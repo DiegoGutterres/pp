@@ -259,3 +259,57 @@ a{
     margin-top: 25px;
     font-weight: 500;
 }
+
+/* teste com preloader */
+
+/* Estilo do Preloader */
+#preloader {
+    position: fixed;
+    width: 414px;
+    height: 896px;
+    background-color: #ECD5B4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Estilo do Texto com animação de fade-in */
+#preloaderText {
+    font-family: 'Alice', serif;
+    font-size: 64px;
+    opacity: 0;
+    color: #ffff;
+    animation: 
+        fadeIn 1s forwards, 
+        moveUp;
+    animation-duration: 5s;
+
+}
+
+.minformin{
+    font-family: 'Alice', serif;
+    font-size: 24px;
+    opacity: 0;
+    color: #ffff;
+    animation: 
+        fadeIn 1s forwards, 
+        moveUp;
+    animation-duration: 5s;
+
+}
+
+
+/* Animação de Fade-in */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Animação de mover para cima */
+@keyframes moveUp {
+    0% { transform: translateY(0vh); }
+    100% { transform: translateY(-42vh); }
+
+}
