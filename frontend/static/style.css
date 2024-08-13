@@ -277,10 +277,14 @@ a{
 
 /* Estilo do Texto com animação de fade-in */
 #preloaderText {
-    font-family: 'Alice', serif;
+    font-family: "Alice", serif;
+    font-weight: 500;
     font-size: 64px;
+    letter-spacing: 2px;
+    font-style: normal;
     opacity: 0;
     color: #ffff;
+    text-shadow: -2px 2px 3px #beae97 ;
     animation: 
         fadeIn 1s forwards, 
         moveUp;
@@ -296,10 +300,22 @@ a{
     animation: 
         fadeIn 1s forwards, 
         moveUp;
-    animation-duration: 5s;
+    animation-duration: 5.05s;
 
 }
 
+#fadeOut{
+    animation: fadeOut 2s ease forwards;
+}
+
+/* @keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+} */
 
 /* Animação de Fade-in */
 @keyframes fadeIn {
@@ -307,9 +323,15 @@ a{
     100% { opacity: 1; }
 }
 
+
 /* Animação de mover para cima */
 @keyframes moveUp {
     0% { transform: translateY(0vh); }
-    100% { transform: translateY(-42vh); }
+    10% { transform: translateY(0vh); }
+    20% { transform: translateY(0vh); }
+    30% { transform: translateY(0vh); }     
+    50% { transform: translateY(-38.5vh); }
+    100% { transform: translateY(-38.5vh); }
 
 }
+
