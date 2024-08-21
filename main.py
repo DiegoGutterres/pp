@@ -8,8 +8,8 @@ genai.configure(api_key="AIzaSyCiORc74qB0QGtY0ZgZ_Z9Xw1j2aWHceNA")
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 # Configuração do pytesseract
-# path_to_tes = r"C:\Users\DIEGOGUTERRESDEFIGUE\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
-path_to_tes = r"C:\Users\diego.gutterres_v4co\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+path_to_tes = r"C:\Users\DIEGOGUTERRESDEFIGUE\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+# path_to_tes = r"C:\Users\diego.gutterres_v4co\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tes
 
 def process_image_and_generate_response(img_path):

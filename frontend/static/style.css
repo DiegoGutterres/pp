@@ -7,8 +7,7 @@
 body{
     background-color: #444343 ;
     width: fit-content;
-    height:fit-content;
-    
+    height:fit-content;   
 }
 
 .bg {
@@ -196,6 +195,10 @@ a{
     background-color: #979797;
 }
 
+.header-response-text{
+    text-shadow: -2px 2px 3px #675A5A;
+}
+
 .traducao{
     margin: 16px;
 }
@@ -211,24 +214,27 @@ a{
     text-align: justify;
 }
 
-.moreOne{
+.options{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.options button{
+    height: 6vh;
+    width: 25vw;
+}
+
+
 .moreone{
-    margin-top: 48px;
+    padding: 50px;
     color: #675A5A;
     font-weight: 400;
     text-align: center;
     font-size: 30px;
 }
 
-.simounao{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
 .simounao button{
     font-size: 16px;
@@ -268,8 +274,12 @@ a{
 /* Estilo do Preloader */
 #preloader {
     position: fixed;
-    width: 384px;
-    height: 867px;
+    /* width: 384px;
+    height: 867px; */
+    width: 100.8vw;
+    height: 107vh;
+
+
     background-color: #ECD5B4;
     display: flex;
     flex-direction: column;
