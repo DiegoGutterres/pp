@@ -10,5 +10,5 @@ window.addEventListener('load', function() {
     setTimeout(function() {
         preloader.style.display = 'none';
         mainContent.style.display = 'block';
-    }, 3000); // Tempo em milissegundos
+    }, 5000); // Tempo em milissegundos
 });

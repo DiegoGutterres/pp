@@ -6,9 +6,8 @@
 
 body{
     background-color: #444343 ;
-    margin: auto;
-    width: 414px;
-    height: 896px;
+    width: fit-content;
+    height:fit-content;
     
 }
 
@@ -204,7 +203,7 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 120vh;
+    height: fit-content;
     padding: 15px;
 }
 
@@ -253,6 +252,10 @@ a{
     justify-content: center;
 }
 
+.responseContainer{
+    text-align: justify;
+}
+
 .doc-allresponse{
     font-size: 22px;
     text-align: justify;
@@ -265,8 +268,8 @@ a{
 /* Estilo do Preloader */
 #preloader {
     position: fixed;
-    width: 414px;
-    height: 896px;
+    width: 384px;
+    height: 867px;
     background-color: #ECD5B4;
     display: flex;
     flex-direction: column;
@@ -298,30 +301,27 @@ a{
     opacity: 0;
     color: #ffff;
     animation: 
-        fadeIn 1s forwards, 
-        moveUp;
+        fadeInOut 1s forwards, 
+        moveUp; 
     animation-duration: 5.05s;
 
 }
 
-#fadeOut{
-    animation: fadeOut 2s ease forwards;
-}
-
-/* @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-} */
 
 /* Animação de Fade-in */
 @keyframes fadeIn {
     0% { opacity: 0; }
+    70% { opacity: 1; }
     100% { opacity: 1; }
 }
+
+/* fadeinfadeout */
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 
 
 /* Animação de mover para cima */
@@ -330,8 +330,31 @@ a{
     10% { transform: translateY(0vh); }
     20% { transform: translateY(0vh); }
     30% { transform: translateY(0vh); }     
-    50% { transform: translateY(-38.5vh); }
-    100% { transform: translateY(-38.5vh); }
+    50% { transform: translateY(-42vh); }
+    100% { transform: translateY(-42vh); }
 
 }
 
+
+/* animaçao de puxar do inicio */
+
+.how-it-works {
+
+    border-radius: 20px 20px 0px 0px;
+    background-color: #ffff;
+    position: relative;
+    animation: pullIn 3s ease-in-out forwards;
+    animation-delay: 5s; /* Inicia após a primeira animação */
+}
+
+@keyframes pullIn {
+    0% {
+      transform: translateY(600px);
+    }
+    50% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }

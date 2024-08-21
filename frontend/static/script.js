@@ -34,22 +34,6 @@ document.getElementById('nextButton').addEventListener('click', function() {
 });
 
 
-document.getElementById('retrieveButton').addEventListener('click', function() {
-    fetch('/retrieve')
-    .then(response => response.json())
-    .then(data => {
-        let recordList = document.getElementById('recordList');
-        recordList.innerHTML = '';
-        data.data.forEach(record => {
-            let listItem = document.createElement('li');
-            listItem.textContent = record.conteudo;
-            recordList.appendChild(listItem);
-        });
-    })
-    .catch((error) => {
-        console.error('Erro ao recuperar os registros:', error);
-    });
-});
 
 // botao de camera
 
@@ -57,23 +41,22 @@ document.getElementById('cameraButton').addEventListener('click', function() {
     document.getElementById('inputCamera').click();
 });
 
+
 document.getElementById('inputCamera').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
         const formData = new FormData();
         formData.append('file', file);
 
+        // Enviar a imagem para o servidor Flask
         fetch('/upload', {
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            console.log('Raw response:', response);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log('Parsed response:', data);
             if (data.success) {
+                // Redirecionar ou exibir a resposta processada
                 window.location.href = '/response.html';
             } else {
                 alert('Erro no upload: ' + data.error);
@@ -85,4 +68,3 @@ document.getElementById('inputCamera').addEventListener('change', function(event
         });
     }
 });
-

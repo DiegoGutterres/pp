@@ -8,7 +8,8 @@ genai.configure(api_key="AIzaSyCiORc74qB0QGtY0ZgZ_Z9Xw1j2aWHceNA")
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 # Configuração do pytesseract
-path_to_tes = r"C:\Users\DIEGOGUTERRESDEFIGUE\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+# path_to_tes = r"C:\Users\DIEGOGUTERRESDEFIGUE\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+path_to_tes = r"C:\Users\diego.gutterres_v4co\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tes
 
 def process_image_and_generate_response(img_path):
@@ -17,7 +18,9 @@ def process_image_and_generate_response(img_path):
         prompt = f"""
         Você é um advogado. Traduza todos os documentos e informações que você receber para que qualquer pessoa entenda. 
         Simplifique o MÁXIMO que conseguir, use palavras simples que todos conheçam. Faça apenas um parágrafo (se possível),
-        que contenha todo o conteúdo importante do documento, como a decisão do juiz, o caso em si etc.
+        que contenha todo o conteúdo importante do documento, como a decisão do juiz, o caso em si, decisões e escolhas das partes,
+        penalidades se tiver, testemunhas de vitimas, etc, compare com outros casos para entender melhor o que são pontos importantes
+        em documentos juridicos.
 
         Aqui vai o texto para ser simplificado: {img_text}
         """
@@ -31,7 +34,7 @@ def process_image_and_generate_response(img_path):
     
 def process_pdf_and_generate_response(pdf):
     try:
-        pdf = PDFQuery('example.pdf')
+        pdf = PDFQuery(pdf)
         pdf.load()
 
         text_elements = pdf.pq('LTTextLineHorizontal')
@@ -40,7 +43,9 @@ def process_pdf_and_generate_response(pdf):
         prompt = f"""
         Você é um advogado. Traduza todos os documentos e informações que você receber para que qualquer pessoa entenda. 
         Simplifique o MÁXIMO que conseguir, use palavras simples que todos conheçam. Faça apenas um parágrafo (se possível),
-        que contenha todo o conteúdo importante do documento, como a decisão do juiz, o caso em si etc.
+        que contenha todo o conteúdo importante do documento, como a decisão do juiz, o caso em si, decisões e escolhas das partes,
+        penalidades se tiver, testemunhas de vitimas, etc, compare com outros casos para entender melhor o que são pontos importantes
+        em documentos juridicos.
 
         Aqui vai o texto para ser simplificado: {pdf_text}
         """
@@ -51,5 +56,4 @@ def process_pdf_and_generate_response(pdf):
     except Exception as e:
         print(f"Error processing pdf: {e}")
         raise e
-
 

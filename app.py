@@ -69,17 +69,17 @@ def upload_file():
             response_data['img_text'] = img_text
             response_data['simplified_text'] = simplified_text
 
-            storeRes('ARQUIVO', simplified_text)
+            storeRes('ARQUIVO-IMG', simplified_text)
             return jsonify({'success': True}), 200
         
 
-        elif '.pdf' in file.filename:
+        elif '.pdf' in file.filename or '.PDF' in file.filename:
         
             pdf_text, simplified_text = process_pdf_and_generate_response(filepath)
             response_data['pdf_text'] = pdf_text
             response_data['simplified_text'] = simplified_text
 
-            storeRes('ARQUIVO', simplified_text)
+            storeRes('ARQUIVO-PDF', simplified_text)
             return jsonify({'success': True}), 200
         
     except Exception as e:
