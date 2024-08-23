@@ -13,7 +13,6 @@ app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'db_tlinth'
 
 
-
 # Conexão com o banco de dados
 conn = pymysql.connect(
     host=app.config['MYSQL_HOST'],
@@ -69,7 +68,7 @@ def upload_file():
             response_data['img_text'] = img_text
             response_data['simplified_text'] = simplified_text
 
-            storeRes('ARQUIVO-IMG', simplified_text)
+            storeRes('ARQUIVO IMG', simplified_text)    
             return jsonify({'success': True}), 200
         
 
@@ -79,28 +78,28 @@ def upload_file():
             response_data['pdf_text'] = pdf_text
             response_data['simplified_text'] = simplified_text
 
-            storeRes('ARQUIVO-PDF', simplified_text)
+            storeRes('ARQUIVO PDF', simplified_text)
             return jsonify({'success': True}), 200
         
     except Exception as e:
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/get_all_responses')
-def get_all_responses():
-    user_id = session.get('user_id')
-    response = {'success': False, 'records': []}
-    try:
-        with conn.cursor() as cursor:
-            sql = "SELECT modes, response FROM res_user WHERE user_id = %s"
-            cursor.execute(sql, (user_id,))
-            records = cursor.fetchall()
-            response['records'] = records
-            response['success'] = True
-    except Exception as e:
-        print(e)
-        response['error'] = str(e)
-    return jsonify(response)
+# @app.route('/get_all_responses')
+# def get_all_responses():
+#     user_id = session.get('user_id')
+#     response = {'success': False, 'records': []}
+#     try:
+#         with conn.cursor() as cursor:
+#             sql = "SELECT modes, response FROM res_user WHERE user_id = %s"
+#             cursor.execute(sql, (user_id,))
+#             records = cursor.fetchall()
+#             response['records'] = records
+#             response['success'] = True
+#     except Exception as e:
+#         print(e)
+#         response['error'] = str(e)
+#     return jsonify(response)
 
 
 

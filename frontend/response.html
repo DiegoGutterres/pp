@@ -48,6 +48,7 @@
             window.location.href = '/index.html';
         });
 
+        // pega a resposta transforma em json e mostra na tela
         fetch('/get_response')
             .then(response => response.json())
             .then(data => {
@@ -58,7 +59,7 @@
                 document.getElementById('translatedText').innerText = 'Erro ao carregar o texto';
             });
             
-            
+                
         document.getElementById('goHomeButton').addEventListener('click', function() {
             fetch('/get_all_responses')
             .then(response => response.json())

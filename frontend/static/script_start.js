@@ -1,7 +1,9 @@
+//trocar de pagina no botao inicial
 document.getElementById('startButton').addEventListener('click', function() {
     window.location.href = '/index.html';
 });
 
+//gambiarra de animaçao
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     const mainContent = document.getElementById('how-it-works');
