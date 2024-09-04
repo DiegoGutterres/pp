@@ -85,21 +85,21 @@ def upload_file():
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
 
-# @app.route('/get_all_responses')
-# def get_all_responses():
-#     user_id = session.get('user_id')
-#     response = {'success': False, 'records': []}
-#     try:
-#         with conn.cursor() as cursor:
-#             sql = "SELECT modes, response FROM res_user WHERE user_id = %s"
-#             cursor.execute(sql, (user_id,))
-#             records = cursor.fetchall()
-#             response['records'] = records
-#             response['success'] = True
-#     except Exception as e:
-#         print(e)
-#         response['error'] = str(e)
-#     return jsonify(response)
+@app.route('/get_all_responses')
+def get_all_responses():
+    user_id = session.get('user_id')
+    response = {'success': False, 'records': []}
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT modes, response FROM res_user WHERE user_id = %s"
+            cursor.execute(sql, (user_id,))
+            records = cursor.fetchall()
+            response['records'] = records
+            response['success'] = True
+    except Exception as e:
+        print(e)
+        response['error'] = str(e)
+    return jsonify(response)
 
 
 
