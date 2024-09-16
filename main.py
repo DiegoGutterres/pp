@@ -2,6 +2,9 @@ from pytesseract import pytesseract
 import google.generativeai as genai
 from pdfquery import PDFQuery
 import os
+import cv2
+import requests
+from pyzbar import pyzbar
 
 # api init
 genai.configure(api_key="AIzaSyCiORc74qB0QGtY0ZgZ_Z9Xw1j2aWHceNA")
@@ -56,4 +59,55 @@ def process_pdf_and_generate_response(pdf):
     except Exception as e:
         print(f"Error processing pdf: {e}")
         raise e
+    
+# Função para decodificar o QR Code
+def decode_qrcode(image):
+    decoded_objects = pyzbar.decode(image)
+    for obj in decoded_objects:
+        qr_data = obj.data.decode('utf-8')
+        print(f"Data do QR Code: {qr_data}")
+        return qr_data
+
+
+# Função para baixar o PDF de um link (se o QR Code contiver um link para o PDF)
+def download_pdf_from_link(url, output_path="downloaded_pdf.pdf"):
+    try:
+        response = requests.get(url)
+        with open(output_path, 'wb') as f:
+            f.write(response.content)
+        print(f"PDF baixado com sucesso: {output_path}")
+        return output_path
+    except Exception as e:
+        print(f"Erro ao baixar o PDF: {e}")
+        raise e
+
+# Função principal para ler o QR code, baixar o PDF e processá-lo
+def read_qrcode_and_process_pdf(image_path):
+    # Carregar a imagem do QR code
+    image = cv2.imread(image_path)
+
+    # Decodificar QR codes na imagem
+    qr_data = decode_qrcode(image)
+
+    # Se o QR code contiver um link para o PDF, fazer o download
+    if qr_data.startswith("http"):
+        pdf_path = download_pdf_from_link(qr_data)
+    else:
+        print("O QR code não contém um link válido para um PDF.")
+        return
+
+    # Processar o PDF e gerar a resposta simplificada
+    pdf_text, response = process_pdf_and_generate_response(pdf_path)
+
+    print("Texto extraído do PDF:", pdf_text)
+    print("Resposta simplificada:", response)
+
+
+image_path = "imagem.png"
+read_qrcode_and_process_pdf(image_path)
+
+
+
+
+
 
