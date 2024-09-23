@@ -16,12 +16,15 @@
         <header class="header-response">
             <h1 class="header-response-text">tlinth.</h1>
         </header>
-    
+        
         <main class="main-response">  
-                <h2 class="traducoes">Traduções:</h2>
-                <div id="responseContainer"></div>
+            <h2 class="traducoes">Traduções:</h2>
+            <div id="responseContainer"></div>
+            
+            <div class="allresponses-button">
+                <button id="tlinth-header-allresponses">Voltar</button>
 
-
+            </div>
 
                 <div class="work-div-2">
                     <span class="copyright">© 2023 Tlinth - Todos direitos reservados</span>
@@ -35,11 +38,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             const responseContainer = document.getElementById('responseContainer');
             const allResponsesHtml = localStorage.getItem('allResponsesHtml');
+            console.log(allResponsesHtml);
             if (allResponsesHtml) {
                 responseContainer.innerHTML = allResponsesHtml;
             } else {
                 responseContainer.innerHTML = '<p>Nenhuma resposta encontrada.</p>';
             }
+
+        });
+        
+        document.getElementById('tlinth-header-allresponses').addEventListener('click', function() {
+            window.location.href = '/index.html';
         });
     </script>      
 </body>

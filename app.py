@@ -61,17 +61,15 @@ def upload_file():
         file.save(filepath)
         print(file.name)
 
-
         if '.png' in file.filename or '.jpg' in file.filename:
 
             img_text, simplified_text = process_image_and_generate_response(filepath)
             response_data['img_text'] = img_text
             response_data['simplified_text'] = simplified_text
 
-            storeRes('ARQUIVO IMG', simplified_text)    
+            storeRes('CAMERA', simplified_text)    
             return jsonify({'success': True}), 200
         
-
         elif '.pdf' in file.filename or '.PDF' in file.filename:
         
             pdf_text, simplified_text = process_pdf_and_generate_response(filepath)
@@ -100,8 +98,6 @@ def get_all_responses():
         print(e)
         response['error'] = str(e)
     return jsonify(response)
-
-
 
 @app.route('/get_response')
 def get_response():
