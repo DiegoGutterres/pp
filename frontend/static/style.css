@@ -17,6 +17,8 @@ body{
 
 /* -----------header------------- */
 header{
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,6 +29,8 @@ header{
 }
 
 h1{
+    position: relative;
+    z-index: 1;
     font-family: "Alice", serif;
     font-weight: 400;
     font-size: 64px;
@@ -36,10 +40,33 @@ h1{
 
 /* -----------main------- */
 main{
+    position: relative;
+    z-index: 1;
     border-radius: 20px 20px 0px 0px;
     background-color: #ffff;
 }
 
+
+.fade{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 35vh;
+    margin-top: 15vh;
+    background: rgb(136,113,81);
+    background: linear-gradient(0deg, rgba(136,113,81,0.9024859943977591) 19%, rgba(236,213,180,0.7204131652661064) 63%, rgba(255,255,255,0) 89%);
+}
+
+
+.fade-gray{
+    position: absolute; 
+    z-index: 0;
+    width: 100%;
+    height: 35vh;
+    margin-top: 15vh;
+    background: rgb(98,98,98);
+    background: linear-gradient(0deg, rgba(98,98,98,1) 19%, rgba(151,151,151,0.6727941176470589) 63%, rgba(255,255,255,0) 89%);
+}
 
 .camera{
     padding: 25px;    
@@ -136,14 +163,6 @@ a{
     text-decoration: none;
 }
 
-.how-it-works{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 80vh;
-    
-}
 
 .how-it-works p{
     text-align: justify;
@@ -151,6 +170,7 @@ a{
 }
 
 .work-div-1{
+    
     display: flex;
     flex-direction: column;
     padding: 4vh;
@@ -218,6 +238,7 @@ a{
 .traducao{
     margin: 16px;
 }
+
 .how-it-works-response{
     display: flex;
     flex-direction: column;
@@ -337,7 +358,7 @@ a{
     opacity: 0;
     color: #ffff;
     animation: 
-        fadeInOut 2s forwards, 
+        fadeInOut 3s forwards, 
         moveUp; 
     animation-duration: 6.05s;
 
@@ -373,15 +394,37 @@ a{
 
 
 /* animaçao de puxar do inicio */
+.how-it-works-wrapper {
+    position: relative;
+    z-index: 1;
+    animation: pullIn 3.5s ease-in-out forwards; /* Animação no wrapper */
+    animation-delay: 5s; /* Atraso da animação */
+}
 
 .how-it-works {
-
+    position: relative;
+    z-index: 2; /* Conteúdo principal à frente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 80vh;
     border-radius: 20px 20px 0px 0px;
     background-color: #ffff;
-    position: relative;
-    animation: pullIn 3s ease-in-out forwards;
-    animation-delay: 5s; /* Inicia após a primeira animação */
 }
+
+.fade-how-it-works {
+    position: absolute;
+    z-index: 0; /* Gradiente atrás do conteúdo */
+    width: 100%;
+    height: 35vh;
+    margin-top: 15vh;
+    background: rgb(136,113,81);
+    background: linear-gradient(0deg, rgba(136,113,81,0.9024859943977591) 19%, rgba(236,213,180,0.7204131652661064) 63%, rgba(255,255,255,0) 89%);
+    animation: pullIn 4s ease-in-out forwards; /* Animação no wrapper */
+    animation-delay: 5s; /* Atraso da animação */
+}
+
 
 @keyframes pullIn {
     0% {
@@ -395,3 +438,36 @@ a{
     }
   }
 
+/* Loading screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ccc;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -13,26 +13,27 @@ document.getElementById('inputArquivo').addEventListener('change', function(even
 });
 
 //quando clica no next, ele vai fazer uma req pro servidor
+// Adicionar um event listener ao botão de upload de arquivo
 document.getElementById('nextButton').addEventListener('click', function() {
-    //cria um objeto formdata a partir do q foi dado upload
+    // Exibir a tela de carregamento
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    // Cria um objeto formData a partir do formulário de upload
     var formData = new FormData(document.getElementById('uploadForm'));
-    //manda o arquivo p servidor na rota upload
+
+    // Envia o arquivo para o servidor na rota /upload
     fetch('/upload', {
         method: 'POST',
         body: formData
     })
-    //converte a resposta p json
-    .then(response => {
-        console.log('Raw response:', response);
-        return response.json();
-    })
-
-    //verifica se o upload deu bao e manda p pagina de response se sim
+    .then(response => response.json())
     .then(data => {
-        console.log('Parsed response:', data);
+        // Verifica se o upload foi bem-sucedido
         if (data.success) {
+            // Redireciona para a página de resposta
             window.location.href = '/response.html';
         } else {
+            // Exibe um erro se houver falha no upload
             alert('Erro no upload: ' + data.error);
         }
     })
@@ -42,33 +43,28 @@ document.getElementById('nextButton').addEventListener('click', function() {
     });
 });
 
-
-
-// botao de camera, faz um click nobotao invisivel
+// Botão de câmera, faz um clique no botão invisível
 document.getElementById('cameraButton').addEventListener('click', function() {
     document.getElementById('inputCamera').click();
 });
 
-
 document.getElementById('inputCamera').addEventListener('change', function(event) {
-    //cria uma variavel p ver a file
     const file = event.target.files[0];
     if (file) {
-        //cria dnv mais um formdata
+        // Exibe a tela de carregamento
+        document.getElementById('loading-screen').style.display = 'flex';
+
         const formData = new FormData();
-        //coloca  afile dentro do objetio
         formData.append('file', file);
 
-        // Enviar a imagem para o servidor Flask
+        // Enviar a imagem para o servidor
         fetch('/upload', {
             method: 'POST',
             body: formData
         })
-        //transforma a resposta em json
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Redirecionar ou exibir a resposta processada
                 window.location.href = '/response.html';
             } else {
                 alert('Erro no upload: ' + data.error);
