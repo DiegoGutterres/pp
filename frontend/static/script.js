@@ -77,4 +77,37 @@ document.getElementById('inputCamera').addEventListener('change', function(event
     }
 });
 
+// Botão de câmera para o QR Code, faz um clique no botão invisível
+document.getElementById('cameraButtonQR').addEventListener('click', function() {
+    document.getElementById('inputCameraQR').click();
+});
+
+document.getElementById('inputCameraQR').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        document.getElementById('loading-screen').style.display = 'flex';
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        fetch('/upload-qr', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/response.html';
+            } else {
+                alert('Erro no upload: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro no upload');
+        });
+    }
+});
+
+
 

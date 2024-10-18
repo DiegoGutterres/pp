@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory, session
 import pymysql  
 import os
 import uuid
-from main import process_image_and_generate_response, process_pdf_and_generate_response
+from main import process_image_and_generate_response, process_pdf_and_generate_response, process_qr_and_generate_response
 
 app = Flask(__name__, static_folder='frontend/static', static_url_path='/static')
 app.secret_key = 'fgJIMmgkrti5KKLOG@35451sfmkoit455#5'
@@ -82,6 +82,35 @@ def upload_file():
     except Exception as e:
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/upload-qr', methods=['POST'])
+def upload_qr():
+    global response_data
+    response_data = {}  # Reset the response data for new uploads
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
+    try:
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+        print(file.name)
+
+        img_text, simplified_text = process_qr_and_generate_response(filepath)
+        response_data['img_text'] = img_text
+        response_data['simplified_text'] = simplified_text
+
+        storeRes('QR-CODE', simplified_text)    
+        return jsonify({'success': True}), 200
+
+    except Exception as e:
+        print(f"Error processing file: {e}")
+        return jsonify({'error': str(e)}), 500 
+
 
 @app.route('/get_all_responses')
 def get_all_responses():
