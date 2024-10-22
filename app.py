@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory, session
 import pymysql  
 import os
 import uuid
-from main import process_image_and_generate_response, process_pdf_and_generate_response, process_qr_and_generate_response
+from main import process_image_and_generate_response, process_pdf_and_generate_response
 
 app = Flask(__name__, static_folder='frontend/static', static_url_path='/static')
 app.secret_key = 'fgJIMmgkrti5KKLOG@35451sfmkoit455#5'
@@ -82,34 +82,40 @@ def upload_file():
     except Exception as e:
         print(f"Error processing file: {e}")
         return jsonify({'error': str(e)}), 500
-    
-@app.route('/upload-qr', methods=['POST'])
-def upload_qr():
-    global response_data
-    response_data = {}  # Reset the response data for new uploads
+     
+@app.route('/get_document_by_id', methods=['POST'])
+def get_document_by_id():
+    data = request.json
+    doc_id = data.get('id')
 
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    
+    if not doc_id:
+        return jsonify({'error': 'ID não fornecido'}), 400
+
     try:
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-        file.save(filepath)
-        print(file.name)
+        with conn.cursor() as cursor:
+            # Consulta o documento no banco de dados pelo ID
+            sql = "SELECT texto_documentos FROM documentos WHERE id = %s"
+            cursor.execute(sql, (doc_id,))
+            result = cursor.fetchone()
 
-        img_text, simplified_text = process_qr_and_generate_response(filepath)
-        response_data['img_text'] = img_text
-        response_data['simplified_text'] = simplified_text
+            if result:
+                texto_documento = result['texto_documentos']
 
-        storeRes('QR-CODE', simplified_text)    
-        return jsonify({'success': True}), 200
+                # Preparar o texto para tradução com IA
+                texto_documento, simplified_text = process_image_and_generate_response(texto_documento)
+
+                # Armazenar a resposta para exibição futura
+                session['simplified_text'] = simplified_text
+                storeRes('CONSULTA ID', simplified_text)
+
+                return jsonify({'success': True}), 200
+            else:
+                return jsonify({'error': 'Documento não encontrado'}), 404
 
     except Exception as e:
-        print(f"Error processing file: {e}")
-        return jsonify({'error': str(e)}), 500 
+        print(f"Erro ao consultar o banco de dados: {e}")
+        return jsonify({'error': 'Erro ao consultar o banco de dados'}), 500
+
 
 
 @app.route('/get_all_responses')
@@ -134,6 +140,9 @@ def get_response():
         return jsonify({'simplified_text': response_data['simplified_text']})
     else:
         return jsonify({'simplified_text': 'Nenhuma resposta disponível'})
+    
+
+    
 
 @app.route('/')
 def serve_index():

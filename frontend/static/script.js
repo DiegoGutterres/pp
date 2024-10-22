@@ -109,5 +109,35 @@ document.getElementById('inputCameraQR').addEventListener('change', function(eve
     }
 });
 
+// Captura o valor do input e faz uma consulta ao servidor pelo ID do documento
+document.getElementById('docIdButton').addEventListener('click', function() {
+    const docId = document.querySelector('.doc-id input').value;
+    document.getElementById('loading-screen').style.display = 'flex';
 
 
+    if (docId) {
+        // Envia o ID para o servidor
+        fetch('/get_document_by_id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },  
+            body: JSON.stringify({ id: docId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Documento processado com sucesso');
+                window.location.href = '/response.html';  // Redireciona para a página de resposta
+            } else {
+                alert('Erro ao processar o documento: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao consultar o banco de dados');
+        });
+    } else {
+        alert('Por favor, insira um número válido.');
+    }
+});
